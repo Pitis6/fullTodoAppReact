@@ -2,7 +2,6 @@ const express = require("express");
 const userRouter = express();
 const userModel = require("../models/userModel");
 
-
 userRouter
   .get("/", async (req, res) => {
     const users = await userModel.find();
@@ -20,8 +19,8 @@ userRouter
   .post("/", (req, res) => {
     const reqUser = req.body;
     const newUser = new userModel(reqUser);
-    reqUser.save();
-    res.status(200).send(`usuario ${newUser.name} creada exitosamente`);
+    newUser.save();
+    res.status(200).send(`Usuario ${newUser.username} creado exitosamente`);
   })
   .put("/:id", async (req, res) => {
     const { id } = req.params;
@@ -51,4 +50,4 @@ userRouter
     }
   });
 
-module.exports = userRouter
+module.exports = userRouter;
