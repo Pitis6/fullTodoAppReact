@@ -11,16 +11,16 @@ tasksRouter
     const { id } = req.params;
     const task = await taskModel.findById(id);
     if (task) {
-      res.status(200).send(task);
+      res.status(200).json(task);
     } else {
-      res.status(404).send(`La tarea con id ${id} no fue encontrada`);
+      res.status(404).json(`La tarea con id ${id} no fue encontrada`);
     }
   })
   .post("/", (req, res) => {
     const reqTask = req.body;
     const newTask = new taskModel(reqTask);
     newTask.save();
-    res.status(200).send(`Tarea "${newTask.name}" creada exitosamente`);
+    res.status(200).json(`Tarea "${newTask.name}" creada exitosamente`);
   })
   .put("/:id", async (req, res) => {
     const { id } = req.params;
@@ -31,9 +31,9 @@ tasksRouter
       { new: true } // Devuelve el documento actualizado
     );
     if (updatedTask) {
-      res.status(200).send(updatedTask);
+      res.status(200).json(updatedTask);
     } else {
-      res.status(404).send(`La tarea con id ${id} no fue encontrada`);
+      res.status(404).json(`La tarea con id ${id} no fue encontrada`);
     }
   })
   .delete("/:id", async (req, res) => {
@@ -42,11 +42,11 @@ tasksRouter
     if(deletedTAsk){
     res
       .status(200)
-      .send(
+      .json(
         `La tarea con id ${id} fue borrada respuesta del servidor ${deletedTAsk}`
       );
     }else{
-     res.status(404).send(`La tarea con ${id} no fue borrada`)
+     res.status(404).json(`La tarea con ${id} no fue borrada`)
     }
   });
 

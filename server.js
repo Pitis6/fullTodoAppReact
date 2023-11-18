@@ -3,10 +3,12 @@ const conectDb = require("./utils/dbConection");
 const userRouter = require("./routes/users");
 const tasksRouter = require("./routes/tasks");
 const authRouter = require("./routes/auth");
+const cors = require('cors')
 const { validateToken } = require("./utils/jwt");
 const app = express();
-const port = 3000;
+const port = 5000;
 
+app.use(cors())
 app.use(express.json());
 
 app.use("/users", validateToken, conectDb, userRouter);
